@@ -11,5 +11,8 @@ public interface ITerminalGame
     public void UnPause();
     public GameObject GetGameObject();
 
+    public void OnClose();
+    public void OnOpen();
+    
     public void ReSetup();
 }

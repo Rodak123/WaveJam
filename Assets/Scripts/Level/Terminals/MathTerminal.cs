@@ -97,4 +97,12 @@ public class MathTerminal : TerminalGame
         Setup();
         Restart();
     }
+    
+    public override void OnClose()
+    {
+    }
+
+    public override void OnOpen()
+    {
+    }
 }

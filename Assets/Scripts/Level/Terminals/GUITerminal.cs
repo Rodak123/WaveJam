@@ -32,6 +32,7 @@ public class GUITerminal : MonoBehaviour
 
     public void Open(Terminal openedBy)
     {
+        terminal.OnOpen();
         if (terminal.IsPaused())
         {
             terminal.UnPause();
@@ -46,6 +47,7 @@ public class GUITerminal : MonoBehaviour
     public void Close()
     {
         openedBy.OnTerminalClosed();
+        terminal.OnClose();
         terminal.GetGameObject().SetActive(false);
     }
 

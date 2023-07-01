@@ -14,8 +14,11 @@ public class Player : MonoBehaviour
     private IInteractive interactingWith;
     
     [SerializeField] private float startTimeLeft = 40f;
+    [SerializeField] private float maxTimeLeft;
     [SerializeField] private float timeLeft;
     [SerializeField] private bool timerRunning = false;
+
+    [SerializeField] private float timerSpeedScale = 1f;
 
     [SerializeField] private LayerMask interactiveLayers;
 
@@ -31,6 +34,7 @@ public class Player : MonoBehaviour
         spawnPosition = transform.position;
         
         timeLeft = startTimeLeft;
+        maxTimeLeft = startTimeLeft;
     }
 
     void Update()
@@ -67,17 +71,18 @@ public class Player : MonoBehaviour
     {
         if (timeLeft > 0)
         {
-            timeLeft -= Time.deltaTime;
-            if (timeLeft <= 0)
-            {
-                OnTimeOut();
-            }
+            timeLeft -= Time.deltaTime * timerSpeedScale;
+        }
+        else if (timeLeft <= 0)
+        {
+            OnTimeOut();
         }
     }
 
     private void ResetTimer()
     {
         timeLeft = startTimeLeft;
+        maxTimeLeft = startTimeLeft;
         timerRunning = false;
     }
     
@@ -128,7 +133,7 @@ public class Player : MonoBehaviour
 
     public float GetTimeLeft()
     {
-        return Mathf.Max(0, Mathf.Min(timeLeft / startTimeLeft, 1));
+        return Mathf.Max(0, Mathf.Min(timeLeft / maxTimeLeft, 1));
     }
 
     public bool CanUse()
@@ -144,7 +149,11 @@ public class Player : MonoBehaviour
 
     public void AddTime(float time)
     {
-        timeLeft = Mathf.Clamp(timeLeft + time, 0, startTimeLeft);
+        timeLeft = Mathf.Max(timeLeft + time, 0);
+        if (timeLeft > maxTimeLeft)
+        {
+            maxTimeLeft = timeLeft;
+        }
     }
 
     public void SetSpeedScale(float scale)

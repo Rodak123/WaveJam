@@ -1,17 +1,52 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using Random = System.Random;
 
 public class LockTerminal : TerminalGame
 {
-    public void OpenLock()
+    public String pin = "000";
+    public String nextPin = "000";
+
+    [SerializeField] private TMP_Text nextPinText;
+    
+    void Start()
     {
-        OnDone();
+        GeneratePin();
+        GeneratePin();
+    }
+
+    public void PinInput(String inputtedPin)
+    {
+        if (inputtedPin.ToLower().Equals(pin))
+        {
+            OnDone();
+        }
+    }
+
+    private void GeneratePin()
+    {
+        pin = nextPin;
+        
+        Random random = new Random();
+        int pinNumber = random.Next(1000);
+        nextPin = pinNumber.ToString("D3");
+        nextPinText.text = string.Join(" ", nextPin.ToCharArray());
     }
     
     public override void ReSetup()
     {
+        GeneratePin();
         Restart();
+    }
+    
+    public override void OnClose()
+    {
+    }
+    
+    public override void OnOpen()
+    {
     }
 }

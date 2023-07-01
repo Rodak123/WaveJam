@@ -51,5 +51,8 @@ public abstract class TerminalGame : MonoBehaviour, ITerminalGame
         paused = false;
     }
 
+    public abstract void OnClose();
+    public abstract void OnOpen();
+
     public abstract void ReSetup();
 }
