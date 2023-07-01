@@ -11,6 +11,8 @@ public class LockTerminal : TerminalGame
     public String nextPin = "000";
 
     [SerializeField] private TMP_Text nextPinText;
+
+    [SerializeField] private TMP_InputField pinInput;
     
     void Start()
     {
@@ -23,6 +25,10 @@ public class LockTerminal : TerminalGame
         if (inputtedPin.ToLower().Equals(pin))
         {
             OnDone();
+        }
+        else if (inputtedPin.Length >= 3)
+        {
+            pinInput.text = string.Empty;
         }
     }
 

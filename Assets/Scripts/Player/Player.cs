@@ -160,4 +160,9 @@ public class Player : MonoBehaviour
     {
         playerMovement.SetMovementSpeedScale(scale);
     }
+
+    public void SetTimeScale(float scale)
+    {
+        timerSpeedScale = scale;
+    }
 }
