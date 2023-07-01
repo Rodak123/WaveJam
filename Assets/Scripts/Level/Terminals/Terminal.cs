@@ -8,6 +8,8 @@ public class Terminal : MonoBehaviour, IInteractive
     private bool used = false;
 
     [SerializeField] private GUITerminal guiTerminal;
+
+    private bool freeToGo = false;
     
     protected void Action()
     {
@@ -18,6 +20,7 @@ public class Terminal : MonoBehaviour, IInteractive
     {
         if(!CanInteract()) return;
         used = true;
+        freeToGo = false;
         Action();
     }
 
@@ -29,11 +32,23 @@ public class Terminal : MonoBehaviour, IInteractive
 
     public void Restart()
     {
+        if(guiTerminal != null)
+            guiTerminal.Restart();
         used = false;
     }
 
     public void Paused()
     {
         used = false;
+    }
+
+    public void OnTerminalClosed()
+    {
+        freeToGo = true;
+    }
+    
+    public bool CanUnlockMovement()
+    {
+        return freeToGo;
     }
 }

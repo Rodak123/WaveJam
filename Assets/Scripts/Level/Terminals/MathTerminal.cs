@@ -91,4 +91,10 @@ public class MathTerminal : TerminalGame
         if(correctResultIndex != index) return;
         OnDone();
     }
+
+    public override void ReSetup()
+    {
+        Setup();
+        Restart();
+    }
 }

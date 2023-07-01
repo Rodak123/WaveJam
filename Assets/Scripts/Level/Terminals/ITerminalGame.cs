@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,4 +10,6 @@ public interface ITerminalGame
 
     public void UnPause();
     public GameObject GetGameObject();
+
+    public void ReSetup();
 }

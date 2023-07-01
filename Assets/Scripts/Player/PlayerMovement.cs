@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public bool moved = false;
     public bool readyToMove = false;
 
+    private bool lockedMovement = false;
+
     private Rigidbody2D rb;
     
     void Start()
@@ -19,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if(!readyToMove) return;
+        if(!readyToMove || lockedMovement) return;
         
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -44,5 +46,15 @@ public class PlayerMovement : MonoBehaviour
     public void SetMovementSpeedScale(float scale)
     {
         movementSpeedScale = scale;
+    }
+
+    public void Lock()
+    {
+        lockedMovement = true;
+    }
+
+    public void Unlock()
+    {
+        lockedMovement = false;
     }
 }

@@ -133,5 +133,10 @@ public class Door : MonoBehaviour, IInteractive
         unlocked = startsUnlocked;
         gameObject.SetActive(true);
     }
+
+    public bool CanUnlockMovement()
+    {
+        return true;
+    }
     
 }

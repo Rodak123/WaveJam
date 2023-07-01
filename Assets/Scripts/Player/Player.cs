@@ -35,7 +35,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
         if (timerRunning)
         {
             UpdateTimer();
@@ -49,7 +48,13 @@ public class Player : MonoBehaviour
         {
             if(Input.GetKeyDown(useKey)){
                 interactingWith.Interact();
+                playerMovement.Lock();
             }
+        }
+
+        if (interactingWith != null && interactingWith.CanUnlockMovement())
+        {
+            playerMovement.Unlock();
         }
 
         if (Input.GetKeyDown(readyUpKey))
@@ -104,6 +109,7 @@ public class Player : MonoBehaviour
         if (IsInteractive(other.gameObject))
         {
             interactingWith = null;
+            playerMovement.Unlock();
         }
     }
 

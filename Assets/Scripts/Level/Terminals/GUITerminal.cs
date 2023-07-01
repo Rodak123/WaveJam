@@ -45,7 +45,16 @@ public class GUITerminal : MonoBehaviour
 
     public void Close()
     {
+        openedBy.OnTerminalClosed();
         terminal.GetGameObject().SetActive(false);
     }
-    
+
+    public void Restart()
+    {
+        if (terminal.GetGameObject().activeSelf)
+        {
+            Close();
+        }
+        terminal.ReSetup();
+    }
 }

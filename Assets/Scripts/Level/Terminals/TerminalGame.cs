@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TerminalGame : MonoBehaviour, ITerminalGame
+public abstract class TerminalGame : MonoBehaviour, ITerminalGame
 {
-    private bool done;
+    protected bool done;
     private bool paused;
     
     protected void OnDone()
@@ -44,4 +44,12 @@ public class TerminalGame : MonoBehaviour, ITerminalGame
     {
         return gameObject;
     }
+
+    protected void Restart()
+    {
+        done = false;
+        paused = false;
+    }
+
+    public abstract void ReSetup();
 }

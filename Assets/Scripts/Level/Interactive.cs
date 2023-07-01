@@ -7,4 +7,5 @@ public interface IInteractive
     public void Interact();
     public bool CanInteract();
     public void Restart();
+    public bool CanUnlockMovement();
 }
