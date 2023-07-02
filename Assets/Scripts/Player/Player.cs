@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Level Level;
     private bool finished = false;
 
+    [SerializeField] private AudioSource rewindAudio;
+
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -100,6 +102,7 @@ public class Player : MonoBehaviour
         transform.position = spawnPosition;
         ResetTimer();
         playerMovement.Restart();
+        rewindAudio.Play();
     }
 
     private void OnCollisionEnter2D(Collision2D other)

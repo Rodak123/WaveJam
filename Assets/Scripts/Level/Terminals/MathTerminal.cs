@@ -22,6 +22,8 @@ public class MathTerminal : TerminalGame
     private int resultNumber;
     private int correctResultIndex = 0;
 
+    [SerializeField] private AudioSource wrongAudio;
+
     void Start()
     {
         Setup();
@@ -88,7 +90,11 @@ public class MathTerminal : TerminalGame
 
     public void SubmitAnswer(int index)
     {
-        if(correctResultIndex != index) return;
+        if (correctResultIndex != index)
+        {
+            wrongAudio.Play();
+            return;
+        }
         OnDone();
     }
 

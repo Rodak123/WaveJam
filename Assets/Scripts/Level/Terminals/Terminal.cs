@@ -10,6 +10,8 @@ public class Terminal : MonoBehaviour, IInteractive
     [SerializeField] private GUITerminal guiTerminal;
 
     private bool freeToGo = false;
+
+    [SerializeField] private AudioSource openAudio;
     
     protected void Action()
     {
@@ -21,6 +23,7 @@ public class Terminal : MonoBehaviour, IInteractive
         if(!CanInteract()) return;
         used = true;
         freeToGo = false;
+        openAudio.Play();
         Action();
     }
 

@@ -10,11 +10,20 @@ public class GUITerminal : MonoBehaviour
     private ITerminalGame terminal;
 
     private Terminal openedBy;
+
+    [SerializeField] private AudioSource GUIButtonAudio;
+
+    private bool terminalClosed = true;
     
     void Start()
     {
         terminal = terminalGameObject.GetComponent<ITerminalGame>();
         terminal.GetGameObject().SetActive(false);
+    }
+
+    public void PlayButtonAudio()
+    {
+        GUIButtonAudio.Play();
     }
 
     void Update()
@@ -32,6 +41,8 @@ public class GUITerminal : MonoBehaviour
 
     public void Open(Terminal openedBy)
     {
+        if(!terminalClosed) return;
+        terminalClosed = false;
         terminal.OnOpen();
         if (terminal.IsPaused())
         {
@@ -46,6 +57,9 @@ public class GUITerminal : MonoBehaviour
 
     public void Close()
     {
+        if(terminalClosed) return;
+        terminalClosed = true;
+        PlayButtonAudio();
         openedBy.OnTerminalClosed();
         terminal.OnClose();
         terminal.GetGameObject().SetActive(false);

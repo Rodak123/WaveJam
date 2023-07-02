@@ -15,6 +15,10 @@ public class BoosterTerminal : TerminalGame
     [SerializeField] private float boostLoss = 0.05f;
     [SerializeField] private float boost = 0;
 
+    private int boosters = 0;
+
+    [SerializeField] private AudioSource chargeUpAudio;
+
     private bool reachedBoost;
 
     public void Boost()
@@ -49,11 +53,17 @@ public class BoosterTerminal : TerminalGame
             Image boosterLight = boosterLights[i];
             boosterLight.color = i<boostersOn?lightOn:lightOff;
         }
+        if (boostersOn > boosters)
+        {
+            chargeUpAudio.Play();
+        }
+        boosters = boostersOn;
     }
     
     public override void ReSetup()
     {
         boost = 0;
+        boosters = 0;
         reachedBoost = false;
         Restart();
     }

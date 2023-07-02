@@ -19,12 +19,13 @@ public class Door : MonoBehaviour, IInteractive
     
     private bool opening = false;
     
-    [SerializeField]
-    private bool startsUnlocked = true;
+    [SerializeField] private bool startsUnlocked = true;
     private bool unlocked;
 
     private Vector3 startPosition;
     private Vector3 startScale;
+
+    [SerializeField] private AudioSource doorOpeningSource;
 
     void Start()
     {
@@ -101,11 +102,12 @@ public class Door : MonoBehaviour, IInteractive
     private void Open()
     {
         opening = true;
+        doorOpeningSource.Play();
     }
 
     private void OnFullyOpened()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
     
     public void Interact()

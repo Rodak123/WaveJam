@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     
+    [SerializeField] private AudioSource footstepsAudio;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -22,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         if(!readyToMove || lockedMovement) return;
-        
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
@@ -31,7 +33,9 @@ public class PlayerMovement : MonoBehaviour
         {
             moved = true;
         }
+        footstepsAudio.volume = (rb.velocity.magnitude > 0.1 ? 1 : 0);
         rb.velocity = movement * (movementSpeed * movementSpeedScale * Time.deltaTime);
+
     }
 
     public void Restart()
