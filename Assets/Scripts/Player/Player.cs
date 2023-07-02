@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private Vector3 spawnPosition;
 
     [SerializeField] private Level Level;
+    private bool finished = false;
 
     void Start()
     {
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (finished) return;
         if (timerRunning)
         {
             UpdateTimer();
@@ -88,6 +90,7 @@ public class Player : MonoBehaviour
     
     private void OnTimeOut()
     {
+        if (finished) return;
         Level.Restart();
         RespawnBack();
     }
@@ -164,5 +167,11 @@ public class Player : MonoBehaviour
     public void SetTimeScale(float scale)
     {
         timerSpeedScale = scale;
+    }
+
+    public void Finished()
+    {
+        playerMovement.Lock();
+        finished = true;
     }
 }

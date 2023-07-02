@@ -13,8 +13,8 @@ public class LockTerminal : TerminalGame
     [SerializeField] private TMP_Text nextPinText;
 
     [SerializeField] private TMP_InputField pinInput;
-    
-    void Start()
+
+    private void Awake()
     {
         GeneratePin();
         GeneratePin();
@@ -54,5 +54,6 @@ public class LockTerminal : TerminalGame
     
     public override void OnOpen()
     {
+        pinInput.text = string.Empty;
     }
 }
