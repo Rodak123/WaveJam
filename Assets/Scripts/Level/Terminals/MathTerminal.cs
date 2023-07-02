@@ -97,7 +97,11 @@ public class MathTerminal : TerminalGame
         }
         OnDone();
     }
-
+    
+    public override void OnStart()
+    {
+    }
+    
     public override void ReSetup()
     {
         Setup();

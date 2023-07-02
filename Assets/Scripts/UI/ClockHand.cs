@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,6 +9,8 @@ public class ClockHand : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 {
     private bool isGrabbed = false;
 
+    [SerializeField] private AudioSource clackAudio;
+    
     public void OnPointerDown(PointerEventData eventData)
     {
         isGrabbed = true;
@@ -17,6 +20,7 @@ public class ClockHand : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
     {
         isGrabbed = false;
         SnapRotation();
+        Clack();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -27,6 +31,13 @@ public class ClockHand : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
             float angle = Mathf.Atan2(mousePosition.y - transform.position.y, mousePosition.x - transform.position.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
+
+        
+    }
+
+    private void Clack()
+    {
+        clackAudio.Play();
     }
 
     private void SnapRotation()
@@ -42,7 +53,12 @@ public class ClockHand : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
     public int GetHour()
     {
-        float angle = transform.rotation.eulerAngles.z - 90f;
+        return GetHour(transform.rotation.eulerAngles.z);
+    }
+    
+    private int GetHour(float angle)
+    {
+        angle -= 90f;
         int hour = (int)Mathf.Round(angle / 30f);
         return 12 - ((hour + 24) % 12);
     }

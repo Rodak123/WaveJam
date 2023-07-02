@@ -15,10 +15,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     
     [SerializeField] private AudioSource footstepsAudio;
+
+    [SerializeField] private Vector3 lastPos;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        lastPos = transform.position;
     }
 
     void FixedUpdate()
@@ -29,12 +32,18 @@ public class PlayerMovement : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
 
         Vector2 movement = new Vector2(horizontal, vertical).normalized;
-        if (!moved && movement.magnitude > 0)
+        if (movement.magnitude > 0)
         {
-            moved = true;
+            float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f, 0f, angle+90f);
+            if (!moved)
+            {
+                moved = true;
+            }
         }
         footstepsAudio.volume = (rb.velocity.magnitude > 0.1 ? 1 : 0);
         rb.velocity = movement * (movementSpeed * movementSpeedScale * Time.deltaTime);
+        
 
     }
 

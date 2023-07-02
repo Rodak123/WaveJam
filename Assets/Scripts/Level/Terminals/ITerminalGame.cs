@@ -15,4 +15,5 @@ public interface ITerminalGame
     public void OnOpen();
     
     public void ReSetup();
+    public void OnStart();
 }

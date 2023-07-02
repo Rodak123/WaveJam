@@ -59,7 +59,11 @@ public class BoosterTerminal : TerminalGame
         }
         boosters = boostersOn;
     }
-    
+
+    public override void OnStart()
+    {
+    }
+
     public override void ReSetup()
     {
         boost = 0;

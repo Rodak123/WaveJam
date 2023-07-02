@@ -49,6 +49,8 @@ public class WordTerminal : TerminalGame
 
     [SerializeField] private TextMeshProUGUI chosenWordText;
     [SerializeField] private TMP_InputField wordInput;
+
+    [SerializeField] private AudioSource typeAudio;
     
     void Start()
     {
@@ -57,6 +59,7 @@ public class WordTerminal : TerminalGame
 
     public void WordInput(String inputtedWord)
     {
+        typeAudio.Play();
         if (inputtedWord.ToLower().Equals(chosenWord))
         {
             OnDone();
@@ -76,7 +79,11 @@ public class WordTerminal : TerminalGame
         PickRandomWord();
         Restart();
     }
-
+    
+    public override void OnStart()
+    {
+    }
+    
     public override void OnClose()
     {
         wordInput.text = string.Empty;

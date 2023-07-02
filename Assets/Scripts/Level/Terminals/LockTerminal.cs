@@ -14,7 +14,9 @@ public class LockTerminal : TerminalGame
 
     [SerializeField] private TMP_InputField pinInput;
 
-    private void Awake()
+    [SerializeField] private AudioSource beepAudio;
+    
+    public override void OnStart()
     {
         GeneratePin();
         GeneratePin();
@@ -22,6 +24,8 @@ public class LockTerminal : TerminalGame
 
     public void PinInput(String inputtedPin)
     {
+        Debug.Log(inputtedPin);
+        beepAudio.Play();
         if (inputtedPin.ToLower().Equals(pin))
         {
             OnDone();

@@ -53,6 +53,7 @@ public abstract class TerminalGame : MonoBehaviour, ITerminalGame
 
     public abstract void OnClose();
     public abstract void OnOpen();
+    public abstract void OnStart();
 
     public abstract void ReSetup();
 }

@@ -51,7 +51,11 @@ public class TimeTerminal : TerminalGame
             }
         }
     }
-
+    
+    public override void OnStart()
+    {
+    }
+    
     public override void ReSetup()
     {
         Restart();

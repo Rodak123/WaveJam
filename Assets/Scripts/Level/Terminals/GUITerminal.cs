@@ -19,6 +19,7 @@ public class GUITerminal : MonoBehaviour
     {
         terminal = terminalGameObject.GetComponent<ITerminalGame>();
         terminal.GetGameObject().SetActive(false);
+        terminal.OnStart();
     }
 
     public void PlayButtonAudio()
